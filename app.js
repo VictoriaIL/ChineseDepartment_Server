@@ -14,6 +14,7 @@ app.use('/science', require('./routes/sciencePage.js'));
 app.use('/contacts', require('./routes/contactPage.js'));
 app.use('/news', require('./routes/newsPage.js'));
 app.use('/auth', require('./routes/auth.routes.js'));
+app.use('/api', require('./routes/init.js'));
 app.use('/', require('./routes/mainPage.js'));
 
 module.exports = app;
