@@ -7,6 +7,18 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { check, validationResult } = require('express-validator');
 
+router.post('/register', async (req, res) => {
+  try {
+    const { login, password } = req.body;
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+    const user = await Users.create({ login, password: hashedPassword });
+    res.status(201).json({ message: 'User created', userId: user.id });
+  } catch (e) {
+    res.status(500).json({ message: e.message });
+  }
+});
+
 router.post(
   '/login',
   [check('password', 'Неверный пароль').exists()],
