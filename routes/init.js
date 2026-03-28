@@ -4,6 +4,20 @@ const router = Router();
 
 const pagesData = [
   {
+    page: 'main',
+    label: '',
+    heading: 'КАФЕДРА ТЕОРИИ И ПРАКТИКИ КИТАЙСКОГО ЯЗЫКА',
+    mainDescription: 'Факультет китайского языка и культуры, Минский Государственный Лингвистический Университет',
+    featuresTitle: '',
+    featuresInfo: '',
+    detailsTitle: '',
+    detailsInfo: '',
+    addressPlace: '',
+    addressRoom: '',
+    mailName: '',
+    email: '',
+  },
+  {
     page: 'about',
     label: 'О кафедре',
     heading: 'Кафедра китайского языка',
