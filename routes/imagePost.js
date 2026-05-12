@@ -12,14 +12,25 @@ const multer = require('multer');
 const path = require('path');
 
 const s3 = new aws.S3({
-        endpoint: S3_ENDPOINT,
+        endpoint: new aws.Endpoint(S3_ENDPOINT),
         accessKeyId: ACCESS_KEY_ID,
         secretAccessKey: SECRET_ACCESS_KEY,
         signatureVersion: 'v4',
-        region: 'us-east-1',
+        region: 'auto',
         s3ForcePathStyle: true,
+        httpOptions: { timeout: 10000 },
     }
 );
+
+// Проверка подключения к R2 при старте сервера
+s3.listBuckets((err, data) => {
+    if (err) {
+        console.error('R2 connection error:', err.message || err);
+        console.error('Check your S3_ENDPOINT, ACCESS_KEY_ID, SECRET_ACCESS_KEY');
+    } else {
+        console.log('R2 connected successfully, buckets:', data.Buckets.map(b => b.Name));
+    }
+});
 
 const fileFilter = (req, file, cb) => {
     // Allowed ext
