@@ -17,6 +17,7 @@ const s3 = new aws.S3({
         secretAccessKey: SECRET_ACCESS_KEY,
         signatureVersion: 'v4',
         region: 'auto',
+        s3ForcePathStyle: true,
     }
 );
 
