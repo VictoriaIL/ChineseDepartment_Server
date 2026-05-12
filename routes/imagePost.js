@@ -113,8 +113,9 @@ router.post('/upload', verifyToken, (req, res) => {
         } else {
             single(req, res, (err) => {
                 if (err) {
+                    console.error('Upload error:', err.message || err);
                     return res.status(422).send({
-                        message: 'Данный формат не поддерживается.',
+                        message: 'Данный формат не поддерживается!.',
                     });
                 }
                 const publicUrl = `https://pub-0b4a2a4d801146cdadeb5c330579352d.r2.dev/${req.file.key}`;
@@ -150,8 +151,9 @@ router.post('/upload/file', verifyToken, (req, res) => {
         } else {
             files(req, res, (err) => {
                 if (err) {
+                    console.error('Upload error:', err.message || err);
                     return res.status(422).send({
-                        message: 'Данный формат не поддерживается.',
+                        message: 'Данный формат не поддерживается.!!',
                     });
                 }
                 const locations = [];
@@ -191,8 +193,9 @@ router.post('/multiple-file-upload', verifyToken, (req, res) => {
         } else {
             many(req, res, (err) => {
                 if (err) {
+                    console.error('Upload error:', err.message || err);
                     return res.status(422).send({
-                        message: 'Данный формат не поддерживается.',
+                        message: 'Данный формат не поддерживается.!!!',
                     });
                 }
                 const locations = [];
