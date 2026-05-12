@@ -16,7 +16,7 @@ const s3 = new aws.S3({
         accessKeyId: ACCESS_KEY_ID,
         secretAccessKey: SECRET_ACCESS_KEY,
         signatureVersion: 'v4',
-        region: 'auto',
+        region: 'us-east-1',
         s3ForcePathStyle: true,
     }
 );
