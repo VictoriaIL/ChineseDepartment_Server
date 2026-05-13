@@ -22,16 +22,6 @@ const s3 = new aws.S3({
     }
 );
 
-// Проверка подключения к R2 при старте сервера
-s3.listBuckets((err, data) => {
-    if (err) {
-        console.error('R2 connection error:', err.message || err);
-        console.error('Check your S3_ENDPOINT, ACCESS_KEY_ID, SECRET_ACCESS_KEY');
-    } else {
-        console.log('R2 connected successfully, buckets:', data.Buckets.map(b => b.Name));
-    }
-});
-
 const fileFilter = (req, file, cb) => {
     // Allowed ext
     const filetypes = /jpeg|jpg|png|gif|txt|pdf|doc|docx/;
@@ -124,9 +114,8 @@ router.post('/upload', verifyToken, (req, res) => {
         } else {
             single(req, res, (err) => {
                 if (err) {
-                    console.error('Upload error:', err.message || err);
                     return res.status(422).send({
-                        message: 'Данный формат не поддерживается!.',
+                        message: 'Данный формат не поддерживается.',
                     });
                 }
                 const publicUrl = `https://pub-0b4a2a4d801146cdadeb5c330579352d.r2.dev/${req.file.key}`;
@@ -162,9 +151,8 @@ router.post('/upload/file', verifyToken, (req, res) => {
         } else {
             files(req, res, (err) => {
                 if (err) {
-                    console.error('Upload error:', err.message || err);
                     return res.status(422).send({
-                        message: 'Данный формат не поддерживается.!!',
+                        message: 'Данный формат не поддерживается.',
                     });
                 }
                 const locations = [];
@@ -206,7 +194,7 @@ router.post('/multiple-file-upload', verifyToken, (req, res) => {
                 if (err) {
                     console.error('Upload error:', err.message || err);
                     return res.status(422).send({
-                        message: 'Данный формат не поддерживается.!!!',
+                        message: 'Данный формат не поддерживается.',
                     });
                 }
                 const locations = [];
